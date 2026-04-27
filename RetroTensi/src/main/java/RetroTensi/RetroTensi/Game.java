@@ -26,7 +26,7 @@ public class Game extends JPanel {
 
     String playerName = "";
 
-    // 🌍 IDIOMA
+    // IDIOMA
     int language = 0; // 0 español, 1 catalán
     int selectedLanguage = 0;
 
@@ -46,7 +46,7 @@ public class Game extends JPanel {
         setFocusable(true);
         requestFocusInWindow();
 
-        // 🔥 IMPORTANTE: inicializar idioma desde el inicio
+        // IMPORTANTE: inicializar idioma desde el inicio
         language = 0;
         setLanguageTexts();
 
@@ -63,7 +63,7 @@ public class Game extends JPanel {
             @Override
             public void keyPressed(KeyEvent e) {
 
-                // 🌍 SELECCIÓN IDIOMA
+                //SELECCIÓN IDIOMA
                 if (selectingLanguage) {
 
                     if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -81,7 +81,7 @@ public class Game extends JPanel {
                     return;
                 }
 
-                // 🧾 NOMBRE
+                //NOMBRE
                 if (enteringName) {
 
                     if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE && playerName.length() > 0) {
@@ -100,7 +100,7 @@ public class Game extends JPanel {
                     return;
                 }
 
-                // ⏸️ PAUSA
+                // PAUSA
                 if (!inMenu) {
                     if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                         paused = !paused;
