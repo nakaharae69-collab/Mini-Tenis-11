@@ -8,14 +8,14 @@ import java.sql.Statement;
 public class BasedDades {
 	//version ya actualizada
 
-    public static void guardarResultat(String nomJugador, int nivell) {
+    public static void guardarResultat(String nombreJugador, int velocidadPelota, int segundosJugados) {
 
         try {
             Connection conexio = DriverManager.getConnection("jdbc:mysql://localhost/MiniTenis", "root", "");
 
             Statement consultes = conexio.createStatement();
 
-            consultes.executeUpdate("INSERT INTO JUGADORS (username, NivellMaxim) VALUES ('"+ nomJugador + "', " + nivell + ")");
+            consultes.executeUpdate("INSERT INTO JUGADORS (username, NivellMaxim) VALUES ('"+ nombreJugador + "', " + velocidadPelota + segundosJugados + ")");
 
             conexio.close();
 

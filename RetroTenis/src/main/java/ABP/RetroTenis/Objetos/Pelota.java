@@ -86,7 +86,7 @@ public class Pelota {
     // GAME OVER
     private void gameOver() {
         if (y > juego.getHeight()) {
-            juego.gameOver();
+            juego.hasPerdut();
         }
     }
 

@@ -1,6 +1,7 @@
 package ABP.RetroTenis.logica;
 
 import ABP.RetroTenis.Estado.EstadoJuego;
+import ABP.RetroTenis.*;
 import ABP.RetroTenis.Objetos.Pelota;
 import ABP.RetroTenis.Objetos.Raqueta;
 
@@ -9,13 +10,15 @@ public class LogicaJuego {
     private Pelota pelota;
     private Raqueta raqueta;
     private ControlTiempo tiempo;
+    private BasedDades basedades;
 
     public LogicaJuego(Pelota pelota, Raqueta raqueta, ControlTiempo tiempo,
-                       Object o1, Object o2) {
+                       Object o1, Object o2, BasedDades bbdd) {
 
         this.pelota = pelota;
         this.raqueta = raqueta;
         this.tiempo = tiempo;
+        this.basedades = bbdd;
     }
 
     public void actualizar(EstadoJuego estado) {
@@ -24,6 +27,8 @@ public class LogicaJuego {
 
         pelota.move();
         raqueta.move();
+        
+        
     }
 
     public void aplicarVelocidad(int v) {

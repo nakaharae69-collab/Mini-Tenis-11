@@ -1,6 +1,7 @@
 package ABP.RetroTenis;
 
 import java.awt.*;
+
 import javax.swing.*;
 
 import ABP.RetroTenis.Estado.EstadoJuego;
@@ -12,9 +13,10 @@ import ABP.RetroTenis.logica.ControlTiempo;
 import ABP.RetroTenis.logica.LogicaJuego;
 import ABP.RetroTenis.interfaz.GestorSonido;
 import ABP.RetroTenis.interfaz.Sound;
+import ABP.RetroTenis.BasedDades;
 
 @SuppressWarnings("serial")
-public class Juego extends JPanel {
+public class Juego extends JPanel implements ABP.RetroTenis.interfaz.gameOver {
 
     private EstadoJuego estado = EstadoJuego.IDIOMA;
 
@@ -28,6 +30,7 @@ public class Juego extends JPanel {
     private LogicaJuego logica;
 
     private GestorSonido sonido;
+    private BasedDades baseDades;
 
     private int idioma = 0;
     private int idiomaSeleccionado = 0;
@@ -49,6 +52,8 @@ public class Juego extends JPanel {
 
     private int segundosJugados = 0;
 
+	private BasedDades basedades;
+
     public Juego() {
 
         setFocusable(true);
@@ -62,9 +67,11 @@ public class Juego extends JPanel {
 
         tiempo = new ControlTiempo(tiempoMaximo);
 
-        logica = new LogicaJuego(pelota, raqueta, tiempo, obstaculo1, obstaculo2);
+        logica = new LogicaJuego(pelota, raqueta, tiempo, obstaculo1, obstaculo2, basedades);
 
         sonido = new GestorSonido(Sound.BACK, Sound.GAMEOVER);
+        
+        baseDades = new BasedDades();
 
         setTextosIdioma();
 
@@ -212,14 +219,7 @@ public class Juego extends JPanel {
             g2d.drawString(textoPausa, 220, 400);
         }
     }
-
-    public void gameOver() {
-        estado = EstadoJuego.MENU;
-        sonido.pararMusica();
-
-        Sound.GAMEOVER.setFramePosition(0);
-        Sound.GAMEOVER.start();
-    }
+   
 
     private void setTextosIdioma() {
 
@@ -354,5 +354,23 @@ public class Juego extends JPanel {
             juego.move();
             juego.repaint();
         }).start();
+        
     }
+
+	@Override
+	public void hasPerdut() {
+		// TODO Auto-generated method stub
+		System.out.println("-----------------");
+		System.out.println("----GAME OVER----");
+		System.out.println("-----------------");
+		
+		System.out.println("   Has perdut :( ");
+		
+		Sound.BACK.stop();
+		Sound.GAMEOVER.start();
+		
+		
+		ABP.RetroTenis.BasedDades.guardarResultat(nombreJugador, velocidadPelota, segundosJugados);
+		
+	}
 }
