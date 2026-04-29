@@ -1,6 +1,7 @@
 package ABP.RetroTenis;
 
 import java.awt.*;
+
 import javax.swing.*;
 
 import ABP.RetroTenis.Estado.EstadoJuego;
@@ -12,9 +13,10 @@ import ABP.RetroTenis.logica.ControlTiempo;
 import ABP.RetroTenis.logica.LogicaJuego;
 import ABP.RetroTenis.interfaz.GestorSonido;
 import ABP.RetroTenis.interfaz.Sound;
+import ABP.RetroTenis.BasedDades;
 
 @SuppressWarnings("serial")
-public class Juego extends JPanel {
+public class Juego extends JPanel implements ABP.RetroTenis.interfaz.gameOver {
 
     private EstadoJuego estado = EstadoJuego.IDIOMA;
 
@@ -191,14 +193,7 @@ public class Juego extends JPanel {
             g2d.drawString(textoPausa, 220, 400);
         }
     }
-
-    public void gameOver() {
-        estado = EstadoJuego.MENU;
-        sonido.pararMusica();
-
-        Sound.GAMEOVER.setFramePosition(0);
-        Sound.GAMEOVER.start();
-    }
+   
 
     private void setTextosIdioma() {
 
@@ -250,7 +245,7 @@ public class Juego extends JPanel {
     public EstadoJuego getEstado() { return estado; }
     public Raqueta getRaqueta() { return raqueta; }
 
-    // 🧱 GETTERS IMPORTANTES (NUEVO)
+    // GETTERS IMPORTANTES (NUEVO)
     public Obstaculo getObstaculo1() { return obstaculo1; }
     public Obstaculo getObstaculo2() { return obstaculo2; }
 
@@ -331,5 +326,16 @@ public class Juego extends JPanel {
             juego.move();
             juego.repaint();
         }).start();
+        
     }
+
+	@Override
+	public void hasPerdut() {
+		// TODO Auto-generated method stub
+		System.out.println("-----------------");
+		System.out.println("----GAME OVER----");
+		System.out.println("-----------------");
+		
+		System.out.println("   Has perdut :( ");
+	}
 }
