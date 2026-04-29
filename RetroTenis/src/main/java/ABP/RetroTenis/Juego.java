@@ -30,6 +30,7 @@ public class Juego extends JPanel implements ABP.RetroTenis.interfaz.gameOver {
     private LogicaJuego logica;
 
     private GestorSonido sonido;
+    private BasedDades baseDades;
 
     private int idioma = 0;
     private int idiomaSeleccionado = 0;
@@ -51,6 +52,8 @@ public class Juego extends JPanel implements ABP.RetroTenis.interfaz.gameOver {
 
     private int segundosJugados = 0;
 
+	private BasedDades basedades;
+
     public Juego() {
 
         setFocusable(true);
@@ -64,9 +67,11 @@ public class Juego extends JPanel implements ABP.RetroTenis.interfaz.gameOver {
 
         tiempo = new ControlTiempo(tiempoMaximo);
 
-        logica = new LogicaJuego(pelota, raqueta, tiempo, obstaculo1, obstaculo2);
+        logica = new LogicaJuego(pelota, raqueta, tiempo, obstaculo1, obstaculo2, basedades);
 
         sonido = new GestorSonido(Sound.BACK, Sound.GAMEOVER);
+        
+        baseDades = new BasedDades();
 
         setTextosIdioma();
 
@@ -337,5 +342,12 @@ public class Juego extends JPanel implements ABP.RetroTenis.interfaz.gameOver {
 		System.out.println("-----------------");
 		
 		System.out.println("   Has perdut :( ");
+		
+		Sound.BACK.stop();
+		Sound.GAMEOVER.start();
+		
+		
+		ABP.RetroTenis.BasedDades.guardarResultat(nombreJugador, velocidadPelota, segundosJugados);
+		
 	}
 }
