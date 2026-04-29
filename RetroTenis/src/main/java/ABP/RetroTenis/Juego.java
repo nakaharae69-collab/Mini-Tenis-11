@@ -168,7 +168,7 @@ public class Juego extends JPanel {
             return;
         }
 
-        // 🎮 JUEGO
+        // JUEGO
 
         Image fondo = new ImageIcon(getClass().getResource("/img/PrimerFondo.jpg")).getImage();
         g2d.drawImage(fondo, 0, 0, 600, 800, null);
@@ -182,7 +182,7 @@ public class Juego extends JPanel {
         pelota.paint(g2d);
         raqueta.paint(g2d);
 
-        // 🧱 OBSTÁCULOS
+        // OBSTÁCULOS
         obstaculo1.paint(g2d);
         obstaculo2.paint(g2d);
 
