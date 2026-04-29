@@ -48,8 +48,6 @@ public class Juego extends JPanel {
     private int tiempoMaximo = 20;
 
     private int segundosJugados = 0;
-    
-    private int with = 0;
 
     public Juego() {
 
@@ -58,7 +56,7 @@ public class Juego extends JPanel {
         pelota = new Pelota(this);
         raqueta = new Raqueta(this);
 
-        // 🧱 OBSTÁCULOS
+        // OBSTÁCULOS
         obstaculo1 = new Obstaculo(100, 120, 150, 20);
         obstaculo2 = new Obstaculo(350, 170, 150, 20);
 
