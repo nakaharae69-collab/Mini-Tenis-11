@@ -250,7 +250,7 @@ public class Juego extends JPanel {
     public EstadoJuego getEstado() { return estado; }
     public Raqueta getRaqueta() { return raqueta; }
 
-    // 🧱 GETTERS IMPORTANTES (NUEVO)
+    // GETTERS IMPORTANTES
     public Obstaculo getObstaculo1() { return obstaculo1; }
     public Obstaculo getObstaculo2() { return obstaculo2; }
 
