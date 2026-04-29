@@ -56,7 +56,7 @@ public class Juego extends JPanel {
         pelota = new Pelota(this);
         raqueta = new Raqueta(this);
 
-        // OBSTÁCULOS
+        // Obstaculos
         obstaculo1 = new Obstaculo(100, 120, 150, 20);
         obstaculo2 = new Obstaculo(350, 170, 150, 20);
 
@@ -250,7 +250,7 @@ public class Juego extends JPanel {
     public EstadoJuego getEstado() { return estado; }
     public Raqueta getRaqueta() { return raqueta; }
 
-    // GETTERS IMPORTANTES
+    // 🧱 GETTERS IMPORTANTES (NUEVO)
     public Obstaculo getObstaculo1() { return obstaculo1; }
     public Obstaculo getObstaculo2() { return obstaculo2; }
 

@@ -25,79 +25,50 @@ public class ControlTeclado implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
-        EstadoJuego estado = juego.getEstado();
+        switch (juego.getEstado()) {
 
-        // 🌍 IDIOMA
-        if (estado == EstadoJuego.IDIOMA) {
+            case IDIOMA:
+                if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    juego.cambiarIdiomaSeleccionado();
+                }
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    juego.confirmarIdioma();
+                }
+                break;
 
-            if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN) {
-                juego.cambiarIdiomaSeleccionado();
-            }
+            case NOMBRE:
+                if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+                    juego.borrarNombre();
+                } 
+                else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    juego.irMenu();
+                } 
+                else {
+                    juego.escribirNombre(e.getKeyChar());
+                }
+                break;
 
-            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                juego.confirmarIdioma();
-            }
+            case MENU:
+                if (e.getKeyCode() == KeyEvent.VK_UP) juego.menuArriba();
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) juego.menuAbajo();
 
-            return;
-        }
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) juego.aumentarNivel();
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) juego.disminuirNivel();
 
-        // 🧾 NOMBRE
-        if (estado == EstadoJuego.NOMBRE) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) juego.seleccionarOpcionMenu();
+                break;
 
-            if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-                juego.borrarNombre();
-            }
+            case JUGANDO:
+            case PAUSA:
 
-            else if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                juego.irMenu();
-            }
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    juego.alternarPausa();
+                }
 
-            else {
-                juego.escribirNombre(e.getKeyChar());
-            }
-
-            return;
-        }
-
-        // 🎮 MENÚ (MODIFICADO)
-        if (estado == EstadoJuego.MENU) {
-
-            // Navegación vertical
-            if (e.getKeyCode() == KeyEvent.VK_UP) {
-                juego.menuArriba();
-            }
-
-            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                juego.menuAbajo();
-            }
-
-            // 🔥 Cambiar nivel con flechas
-            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                juego.aumentarNivel();
-            }
-
-            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                juego.disminuirNivel();
-            }
-
-            // Seleccionar opción
-            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                juego.seleccionarOpcionMenu();
-            }
-
-            return;
-        }
-
-        // 🎮 JUGANDO / PAUSA
-        if (estado == EstadoJuego.JUGANDO || estado == EstadoJuego.PAUSA) {
-
-            if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                juego.alternarPausa();
-            }
-
-            if (estado == EstadoJuego.JUGANDO) {
-                juego.getRaqueta().keyPressed(e);
-            }
+                if (juego.getEstado() == EstadoJuego.JUGANDO) {
+                    juego.getRaqueta().keyPressed(e);
+                }
+                break;
         }
     }
 }

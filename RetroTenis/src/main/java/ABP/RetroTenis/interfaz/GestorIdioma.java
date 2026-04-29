@@ -4,70 +4,73 @@ public class GestorIdioma {
 
     private int idioma;
 
-    // textos
     private String[] opciones;
-    private String textoTitulo;
-    private String textoNombre;
-    private String textoJugador;
-    private String textoRonda;
-    private String textoTiempo;
-    private String textoPausa;
+    private String[] textos;
 
-    public GestorIdioma(int idiomaInicial) {
-        this.idioma = idiomaInicial;
-        establecerIdioma(idiomaInicial);
+    public GestorIdioma(int idioma) {
+        setIdioma(idioma);
     }
 
-    public void establecerIdioma(int idioma) {
+    public void setIdioma(int idioma) {
         this.idioma = idioma;
 
+        // Idioma castella
         if (idioma == 0) {
             opciones = new String[]{"Fácil", "Medio", "Difícil", "Salir"};
-            textoTitulo = "MINI TENIS";
-            textoNombre = "Introduce tu nombre:";
-            textoJugador = "Jugador: ";
-            textoRonda = "Ronda: ";
-            textoTiempo = "Tiempo: ";
-            textoPausa = "PAUSA";
-        } else {
+
+            textos = new String[]{
+                "MINI TENIS",          // titulo
+                "Introduce tu nombre:", // nom
+                "Jugador: ",           // jugador
+                "Ronda: ",             // ronda
+                "Tiempo: ",            // temps
+                "PAUSA"                // pausa
+            };
+
+        } 
+        //Idioma catala
+        else {
             opciones = new String[]{"Fàcil", "Mitjà", "Difícil", "Sortir"};
-            textoTitulo = "MINI TENIS";
-            textoNombre = "Introdueix el teu nom:";
-            textoJugador = "Jugador: ";
-            textoRonda = "Ronda: ";
-            textoTiempo = "Temps: ";
-            textoPausa = "PAUSA";
+
+            textos = new String[]{
+                "MINI TENIS",
+                "Introdueix el teu nom:",
+                "Jugador: ",
+                "Ronda: ",
+                "Temps: ",
+                "PAUSA"
+            };
         }
     }
 
-    // GETTERS
+    // getters
 
     public String[] getOpciones() {
         return opciones;
     }
 
-    public String getTextoTitulo() {
-        return textoTitulo;
+    public String getTitulo() {
+        return textos[0];
     }
 
-    public String getTextoNombre() {
-        return textoNombre;
+    public String getNombre() {
+        return textos[1];
     }
 
-    public String getTextoJugador() {
-        return textoJugador;
+    public String getJugador() {
+        return textos[2];
     }
 
-    public String getTextoRonda() {
-        return textoRonda;
+    public String getRonda() {
+        return textos[3];
     }
 
-    public String getTextoTiempo() {
-        return textoTiempo;
+    public String getTiempo() {
+        return textos[4];
     }
 
-    public String getTextoPausa() {
-        return textoPausa;
+    public String getPausa() {
+        return textos[5];
     }
 
     public int getIdioma() {

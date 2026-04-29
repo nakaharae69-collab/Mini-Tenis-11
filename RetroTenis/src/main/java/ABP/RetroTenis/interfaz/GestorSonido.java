@@ -12,7 +12,6 @@ public class GestorSonido {
         this.sonidoGameOver = sonidoGameOver;
     }
 
-    // 🎵 música de fondo
     public void iniciarMusica() {
         if (musicaFondo != null) {
             musicaFondo.setFramePosition(0);
@@ -27,9 +26,7 @@ public class GestorSonido {
     }
 
     public void pausarMusica() {
-        if (musicaFondo != null) {
-            musicaFondo.stop();
-        }
+        pararMusica();
     }
 
     public void reanudarMusica() {
@@ -38,7 +35,6 @@ public class GestorSonido {
         }
     }
 
-    // 💀 game over
     public void reproducirGameOver() {
         if (sonidoGameOver != null) {
             sonidoGameOver.setFramePosition(0);

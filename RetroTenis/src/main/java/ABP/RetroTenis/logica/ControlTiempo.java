@@ -9,24 +9,29 @@ public class ControlTiempo {
     private int ronda;
     private int velocidadPelota;
 
-    public ControlTiempo(int tiempoMaximoInicial) {
-        this.tiempoMaximo = tiempoMaximoInicial;
-        this.tiempoRestante = tiempoMaximoInicial;
-        this.ronda = 0;
-        this.velocidadPelota = 1;
+    public ControlTiempo(int tiempoMaximo) {
+        reiniciar(tiempoMaximo);
     }
 
     public void actualizar(EstadoJuego estado) {
 
-        if (estado != EstadoJuego.JUGANDO) return;
+        if (estado == EstadoJuego.JUGANDO) {
+            tiempoRestante--;
 
-        tiempoRestante--;
-
-        if (tiempoRestante <= 0) {
-            velocidadPelota++;
-            ronda++;
-            tiempoRestante = tiempoMaximo;
+            if (tiempoRestante <= 0) {
+                ronda++;
+                velocidadPelota++;
+                tiempoRestante = tiempoMaximo;
+            }
         }
+    }
+
+    // reiniciar todo
+    public void reiniciar(int tiempoMaximo) {
+        this.tiempoMaximo = tiempoMaximo;
+        this.tiempoRestante = tiempoMaximo;
+        this.ronda = 0;
+        this.velocidadPelota = 1;
     }
 
     // GETTERS
@@ -35,24 +40,11 @@ public class ControlTiempo {
         return tiempoRestante;
     }
 
-    public int getTiempoMaximo() {
-        return tiempoMaximo;
-    }
-
     public int getRonda() {
         return ronda;
     }
 
     public int getVelocidadPelota() {
         return velocidadPelota;
-    }
-
-    // SETTERS IMPORTANTES
-
-    public void reiniciar(int tiempoMaximoNuevo) {
-        this.tiempoMaximo = tiempoMaximoNuevo;
-        this.tiempoRestante = tiempoMaximoNuevo;
-        this.ronda = 0;
-        this.velocidadPelota = 1;
     }
 }

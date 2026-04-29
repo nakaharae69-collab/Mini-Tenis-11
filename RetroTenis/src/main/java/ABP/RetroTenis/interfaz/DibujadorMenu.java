@@ -4,69 +4,57 @@ import java.awt.*;
 
 public class DibujadorMenu {
 
-    public void dibujarIdioma(Graphics2D g2d, int idiomaSeleccionado) {
+    private Font titulo = new Font("Arial", Font.BOLD, 30);
+    private Font normal = new Font("Arial", Font.PLAIN, 25);
 
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect(0, 0, 600, 800);
-
-        g2d.setColor(Color.BLACK);
-        g2d.setFont(new Font("Arial", Font.BOLD, 30));
-        g2d.drawString("Idioma / Llengua", 180, 200);
-
-        String[] idiomas = {"Español", "Català"};
-
-        for (int i = 0; i < idiomas.length; i++) {
-
-            int y = 300 + i * 60;
-
-            if (i == idiomaSeleccionado) {
-                g2d.setColor(Color.BLACK);
-                g2d.fillRect(200, y - 30, 200, 40);
-                g2d.setColor(Color.WHITE);
-            } else {
-                g2d.setColor(Color.BLACK);
-            }
-
-            g2d.drawString(idiomas[i], 220, y);
-        }
+    // Seleccio d'idioma
+    public void dibujarIdioma(Graphics2D g, int seleccionado) {
+        String[] opciones = {"Español", "Català"};
+        dibujarMenu(g, "Idioma / Llengua", opciones, seleccionado);
     }
 
-    public void dibujarNombre(Graphics2D g2d, GestorIdioma idioma, String nombreJugador) {
+    // Seleccio de nom
+    public void dibujarNombre(Graphics2D g, String texto, String nombre) {
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, 600, 800);
 
-        g2d.setColor(Color.BLACK);
-        g2d.fillRect(0, 0, 600, 800);
+        g.setColor(Color.WHITE);
+        g.setFont(titulo);
 
-        g2d.setColor(Color.WHITE);
-        g2d.setFont(new Font("Arial", Font.BOLD, 30));
-
-        g2d.drawString(idioma.getTextoNombre(), 160, 200);
-        g2d.drawString(nombreJugador + "_", 220, 300);
+        g.drawString(texto, 150, 200);
+        g.drawString(nombre + "_", 220, 300);
     }
 
-    public void dibujarMenuPrincipal(Graphics2D g2d, GestorIdioma idioma, int opcionSeleccionada) {
+    // Menu principal
+    public void dibujarMenuPrincipal(Graphics2D g, String titulo, String[] opciones, int seleccionado) {
+        dibujarMenu(g, titulo, opciones, seleccionado);
+    }
 
-        g2d.setColor(Color.WHITE);
-        g2d.fillRect(0, 0, 600, 800);
+    // Metode general
+    private void dibujarMenu(Graphics2D g, String tituloTexto, String[] opciones, int seleccionado) {
 
-        g2d.setColor(Color.BLACK);
-        g2d.setFont(new Font("Arial", Font.BOLD, 40));
-        g2d.drawString(idioma.getTextoTitulo(), 140, 120);
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, 600, 800);
 
-        g2d.setFont(new Font("Arial", Font.PLAIN, 30));
+        g.setColor(Color.BLACK);
+        g.setFont(titulo);
+        g.drawString(tituloTexto, 150, 150);
 
-        for (int i = 0; i < idioma.getOpciones().length; i++) {
+        g.setFont(normal);
+
+        for (int i = 0; i < opciones.length; i++) {
 
             int y = 250 + i * 60;
 
-            if (i == opcionSeleccionada) {
-                g2d.setColor(Color.BLACK);
-                g2d.fillRect(200, y - 30, 200, 40);
-                g2d.setColor(Color.WHITE);
+            if (i == seleccionado) {
+                g.setColor(Color.BLACK);
+                g.fillRect(180, y - 25, 240, 40);
+                g.setColor(Color.WHITE);
             } else {
-                g2d.setColor(Color.BLACK);
+                g.setColor(Color.BLACK);
             }
 
-            g2d.drawString(idioma.getOpciones()[i], 220, y);
+            g.drawString(opciones[i], 200, y);
         }
     }
 }
