@@ -168,9 +168,30 @@ public class Juego extends JPanel {
             return;
         }
 
+        
         // JUEGO
-
-        Image fondo = new ImageIcon(getClass().getResource("/img/PrimerFondo.jpg")).getImage();
+        Image fondo = null;
+        
+        
+        if (velocidadPelota >= 0 && velocidadPelota <= 5) {	
+        	fondo = new ImageIcon(getClass().getResource("/img/fondo1.jpg")).getImage();
+        }
+        
+        if (velocidadPelota >= 6 && velocidadPelota <= 10) {
+        	fondo = new ImageIcon(getClass().getResource("/img/fondo2.png")).getImage();
+        }
+        
+        if (velocidadPelota >= 11 && velocidadPelota <= 15) {	
+        	fondo = new ImageIcon(getClass().getResource("/img/fondo3.png")).getImage();
+        }
+        
+        if (velocidadPelota >= 16) {
+        	fondo = new ImageIcon(getClass().getResource("/img/fondo4.png")).getImage();
+        }
+        
+        
+       
+        
         g2d.drawImage(fondo, 0, 0, 600, 800, null);
 
         g2d.setFont(new Font("Verdana", Font.BOLD, 20));
@@ -250,7 +271,7 @@ public class Juego extends JPanel {
     public EstadoJuego getEstado() { return estado; }
     public Raqueta getRaqueta() { return raqueta; }
 
-    // 🧱 GETTERS IMPORTANTES (NUEVO)
+    // GETTERS IMPORTANTES (NUEVO)
     public Obstaculo getObstaculo1() { return obstaculo1; }
     public Obstaculo getObstaculo2() { return obstaculo2; }
 
@@ -326,6 +347,8 @@ public class Juego extends JPanel {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        
 
         new Timer(10, e -> {
             juego.move();
