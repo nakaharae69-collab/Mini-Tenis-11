@@ -48,6 +48,8 @@ public class Juego extends JPanel {
     private int tiempoMaximo = 20;
 
     private int segundosJugados = 0;
+    
+    private int with = 0;
 
     public Juego() {
 
