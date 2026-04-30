@@ -6,31 +6,30 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class BasedDades {
-	//version ya actualizada
 
-    public static void guardarResultat(String nombreJugador, int velocidadPelota, int segundosJugados) {
-
+    public static void guardarResultat(String nombreJugador, int velocidadPelota) {
         try {
-            Connection conexio = DriverManager.getConnection("jdbc:mysql://localhost/MiniTenis", "root", "");
+           
+            Class.forName("com.mysql.cj.jdbc.Driver"); 
 
+            Connection conexio = DriverManager.getConnection("jdbc:mysql://localhost/MiniTenis", "root", "");
             Statement consultes = conexio.createStatement();
 
-            consultes.executeUpdate("INSERT INTO JUGADORS (username, NivellMaxim) VALUES ('"+ nombreJugador + "', " + velocidadPelota + segundosJugados + ")");
+            // Executem l'INSERT. He posat els noms segons el teu SQL de Workbench.
+         // Codi corregit:
+            String sql = "INSERT INTO JUGADORS (Username, NivellMaxim) VALUES ('" + nombreJugador + "', " + velocidadPelota + ")";            consultes.executeUpdate(sql);
 
+            System.out.println("SQL que s'ha executat: " + sql);
+
+            // Tanquem tot
+            consultes.close();
             conexio.close();
 
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error, o s'ha trobat  l'SQL");
         } catch (SQLException e) {
+            System.out.println("Error general " + e.getMessage());
             e.printStackTrace();
         }
     }
 }
-
-//poner en el codigo de juego nuevo
-//public void gameOver() {
-//running = false;
-//Sound.BACK.stop();
-//Sound.GAMEOVER.start();
-
-//logica.BasedDades.guardarResultat(nomJugador, nivell);
-
-// inMenu = true;

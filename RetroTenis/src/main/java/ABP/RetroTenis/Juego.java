@@ -2,6 +2,7 @@ package ABP.RetroTenis;
 
 import java.awt.*;
 
+
 import javax.swing.*;
 
 import ABP.RetroTenis.Estado.EstadoJuego;
@@ -19,7 +20,7 @@ import ABP.RetroTenis.BasedDades;
 public class Juego extends JPanel implements ABP.RetroTenis.interfaz.gameOver {
 
     private EstadoJuego estado = EstadoJuego.IDIOMA;
-
+ 
     private Pelota pelota;
     private Raqueta raqueta;
 
@@ -66,12 +67,14 @@ public class Juego extends JPanel implements ABP.RetroTenis.interfaz.gameOver {
         obstaculo2 = new Obstaculo(350, 170, 150, 20);
 
         tiempo = new ControlTiempo(tiempoMaximo);
+        
+        baseDades = new BasedDades();
 
         logica = new LogicaJuego(pelota, raqueta, tiempo, obstaculo1, obstaculo2, basedades);
 
         sonido = new GestorSonido(Sound.BACK, Sound.GAMEOVER);
         
-        baseDades = new BasedDades();
+        
 
         setTextosIdioma();
 
@@ -356,21 +359,38 @@ public class Juego extends JPanel implements ABP.RetroTenis.interfaz.gameOver {
         }).start();
         
     }
+    //boolean para parar el bucle interminable
+    private boolean jocAcabat = false;
 
-	@Override
-	public void hasPerdut() {
-		// TODO Auto-generated method stub
-		System.out.println("-----------------");
-		System.out.println("----GAME OVER----");
-		System.out.println("-----------------");
-		
-		System.out.println("   Has perdut :( ");
-		
-		Sound.BACK.stop();
-		Sound.GAMEOVER.start();
-		
-		
-		ABP.RetroTenis.BasedDades.guardarResultat(nombreJugador, velocidadPelota, segundosJugados);
-		
-	}
+    @Override
+    public void hasPerdut() {
+        if (jocAcabat) {
+            return; 
+        }
+        jocAcabat = true; 
+
+        
+        Sound.BACK.stop();
+        Sound.GAMEOVER.start();
+
+        System.out.println("-----------------");
+        System.out.println("----GAME OVER----");
+        System.out.println("-----------------");
+
+        
+        try {
+            new DataBaseForm(nombreJugador, velocidadPelota);
+        } catch (Exception e) {
+            System.out.println("Error general " + e.getMessage());
+        }
+
+        
+        try {
+            BasedDades.guardarResultat(nombreJugador, velocidadPelota);
+            System.out.println("Els teus resultats s'han guardat correctament :)");
+        } catch (Exception e) {
+            System.out.println("No s'ha pogut guardar a la base de dades, però la finestra s'hauria de veure.");
+            e.printStackTrace();
+        }
+    }
 }
