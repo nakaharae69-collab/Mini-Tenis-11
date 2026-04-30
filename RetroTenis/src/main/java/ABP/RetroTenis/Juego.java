@@ -6,7 +6,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import ABP.RetroTenis.Estado.EstadoJuego;
-import ABP.RetroTenis.Objetos.Pelota;
+import ABP.RetroTenis.Objetos.Pelota; 
 import ABP.RetroTenis.Objetos.Raqueta;
 import ABP.RetroTenis.Objetos.Obstaculo;
 import ABP.RetroTenis.logica.ControlTeclado;
@@ -346,6 +346,7 @@ public class Juego extends JPanel implements ABP.RetroTenis.interfaz.gameOver {
         Juego juego = new Juego();
 
         frame.add(juego);
+        
         frame.setSize(600, 800);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -359,38 +360,17 @@ public class Juego extends JPanel implements ABP.RetroTenis.interfaz.gameOver {
         }).start();
         
     }
-    //boolean para parar el bucle interminable
-    private boolean jocAcabat = false;
-
+    private boolean jocAcabat =false;
     @Override
     public void hasPerdut() {
-        if (jocAcabat) {
-            return; 
-        }
-        jocAcabat = true; 
+        if (jocAcabat) return;
+        jocAcabat = true;
 
-        
         Sound.BACK.stop();
         Sound.GAMEOVER.start();
 
-        System.out.println("-----------------");
-        System.out.println("----GAME OVER----");
-        System.out.println("-----------------");
-
-        
-        try {
-            new DataBaseForm(nombreJugador, velocidadPelota);
-        } catch (Exception e) {
-            System.out.println("Error general " + e.getMessage());
-        }
-
-        
-        try {
-            BasedDades.guardarResultat(nombreJugador, velocidadPelota);
-            System.out.println("Els teus resultats s'han guardat correctament :)");
-        } catch (Exception e) {
-            System.out.println("No s'ha pogut guardar a la base de dades, però la finestra s'hauria de veure.");
-            e.printStackTrace();
-        }
+        // Obrim la finestra passant-li el nom i els punts actuals
+        new DataBaseForm(nombreJugador, velocidadPelota);
     }
+
 }
